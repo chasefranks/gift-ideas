@@ -14,6 +14,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<jackson.version>2.9.0</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -21,6 +23,11 @@
 			<groupId>com.googlecode.clichemaven</groupId>
 			<artifactId>cliche</artifactId>
 			<version>110413</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

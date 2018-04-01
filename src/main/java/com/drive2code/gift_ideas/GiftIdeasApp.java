@@ -7,24 +7,33 @@ import asg.cliche.ShellFactory;
 
 public class GiftIdeasApp {
 	
+	// dependency is injected through constructor
+	private GiftService giftService;
+	
+	public GiftIdeasApp(GiftService giftService) {
+		this.giftService = giftService;
+	}
+	
 	@Command(
 		description = "add a gift idea for someone"
 	)
-	public void add(String who, String what) {
+	public void add(String who, String what) {		
 		System.out.println(String.format("adding gift idea %s for %s", what, who));
+		giftService.add(who, what);		
 	}
 	
 	@Command(
 		description = "retrieve a random gift idea for someone",
 		header = "random gift idea: "
 	)
-	public String get(String who) {
-		return "toaster";
+	public String get(String who) {		
+		return giftService.get(who);
 	}
 
 	public static void main(String[] args) throws IOException {
-		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasApp())
-		.commandLoop(); // and three.
+		// TODO command line option to pass in a text file for saving gift ideas
+		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasApp(new TextFileGiftService()))
+			.commandLoop();
 	}
 
 }
