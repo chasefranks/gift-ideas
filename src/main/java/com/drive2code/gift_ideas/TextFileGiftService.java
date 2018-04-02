@@ -1,55 +1,40 @@
 package com.drive2code.gift_ideas;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 
 public class TextFileGiftService implements GiftService {
 	
-	private String path = "gift-ideas.json";
+	private static final String DEFAULT_FILE = "gift-ideas.json";
 	
-	private HashMap<String, List<String>> giftsMap;
+	private HashMap<String, List<String>> giftsMap; // Nina -> { keychain, chandelier }
 	private ObjectMapper mapper = new ObjectMapper();
+
+	private String path;
 	
-	public TextFileGiftService() throws JsonParseException, JsonMappingException, IOException {
-		
-		File file = new File(this.path);
-		file.createNewFile();
-		
-		FileInputStream inputStream = new FileInputStream(file);		
-		
-		try {	
-			giftsMap = mapper.readValue(inputStream, HashMap.class);
-		} catch (MismatchedInputException e) {
-			mapper.writeValue(file, new HashMap<>());
-		}
-		
-		inputStream.close();
-		
+	public TextFileGiftService() {
+		this(DEFAULT_FILE);
 	}
 
-	public TextFileGiftService(String path) throws Exception {
+	public TextFileGiftService(String path) {
 		
 		this.path = path;
 		
 		File file = new File(path);
-		FileInputStream inputStream = new FileInputStream(file);
 		
-		mapper.writeValue(file, new HashMap<>());
-		
-		giftsMap = mapper.readValue(inputStream, HashMap.class);
-		
-		inputStream.close();
+		if (!file.exists()) {
+			giftsMap = new HashMap<>();
+		} else {
+			try {
+				giftsMap = mapper.readValue(file, HashMap.class);
+			} catch (Exception e) {
+				throw new RuntimeException("error parsing file at location " + path + ". Check to ensure the contents is proper json", e);
+			}
+		}
 		
 	}
 	
@@ -95,14 +80,17 @@ public class TextFileGiftService implements GiftService {
 	
 	}
 
-	private void flush() throws JsonGenerationException, JsonMappingException, IOException {
+	/**
+	 * Writes contents of {@link HashMap} gift ideas to disk.
+	 */
+	private void flush() {		
+		File file = new File(this.path);	
 		
-		File file = new File(this.path);
-		FileOutputStream outputStream = new FileOutputStream(file);
-		
-		mapper.writeValue(outputStream, giftsMap);
-		
-		outputStream.close();
+		try {
+			mapper.writeValue(file, giftsMap);
+		} catch (Exception e) {
+			throw new RuntimeException("unable to flush gift ideas to disk at location \" + path", e);
+		}
 		
 	}
 

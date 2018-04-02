@@ -13,8 +13,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TextFileGiftServiceTest {
@@ -33,13 +31,8 @@ public class TextFileGiftServiceTest {
 		testGifts.put("David", new ArrayList<>());
 		testGifts.get("David").add("worklight");
 		testGifts.get("David").add("FarCry5");
-		
+				
 		new ObjectMapper().writeValue(file, testGifts);
-	}
-	
-	@Test
-	public void testConstructor() throws Exception {
-		TextFileGiftService giftService = new TextFileGiftService();
 	}
 	
 	@Test
