@@ -29,10 +29,18 @@ public class GiftIdeasApp {
 	public String get(String who) {		
 		return giftService.get(who);
 	}
+	
+	@Command(
+		description = "retrieve a random gift for someone",
+		header = "random gift idea: "
+	)
+	public String getRandom(String who) {
+		return giftService.getRandom(who);
+	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO command line option to pass in a text file for saving gift ideas
-		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasApp(new TextFileGiftService()))
+		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasApp(new InMemoryGiftService()))
 			.commandLoop();
 	}
 

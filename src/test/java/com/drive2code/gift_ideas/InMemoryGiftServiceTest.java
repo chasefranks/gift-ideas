@@ -2,6 +2,8 @@ package com.drive2code.gift_ideas;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class InMemoryGiftServiceTest {
@@ -26,6 +28,21 @@ public class InMemoryGiftServiceTest {
 	public void testGetPersonDoesntExistYet() {		
 		GiftService inMemoryGiftService = new InMemoryGiftService();		
 		assertEquals("", inMemoryGiftService.get("personWhoDoesntExist"));
+	}
+	
+	@Test
+	public void testGetRandom() {
+		
+		GiftService inMemoryGiftService = new InMemoryGiftService();
+		inMemoryGiftService.add("Chase", "headphones");
+		inMemoryGiftService.add("Chase", "beer");
+		inMemoryGiftService.add("Chase", "laptop");
+		
+		String randomGift = inMemoryGiftService.getRandom("Chase");
+		
+		assertNotNull(randomGift);
+		assertTrue("random gift isn't contained in list of gifts", Arrays.asList("headphones", "beer", "laptop").contains(randomGift));
+		
 	}
 
 }

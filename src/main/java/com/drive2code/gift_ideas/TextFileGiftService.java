@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -79,11 +80,32 @@ public class TextFileGiftService implements GiftService {
 		}
 	
 	}
+	
+	@Override
+	public String getRandom(String who) {
+		// if person isn't in map yet, add them with empty list
+		if (!giftsMap.containsKey(who)) {
+			giftsMap.put(who, new ArrayList<>());
+		}
+
+		List<String> gifts = giftsMap.get(who);
+
+		int numberOfGifts = gifts.size();
+
+		if (numberOfGifts == 0) {
+			return "no gifts for " + who + " yet. Use add " + who + " to add gifts for them";
+		} else if (numberOfGifts == 1) {
+			return gifts.get(0);
+		} else {
+			return gifts.get(new Random().nextInt(numberOfGifts - 1));
+		}
+	}
 
 	/**
 	 * Writes contents of {@link HashMap} gift ideas to disk.
 	 */
-	private void flush() {		
+	private void flush() {	
+		
 		File file = new File(this.path);	
 		
 		try {
@@ -93,5 +115,5 @@ public class TextFileGiftService implements GiftService {
 		}
 		
 	}
-
+	
 }

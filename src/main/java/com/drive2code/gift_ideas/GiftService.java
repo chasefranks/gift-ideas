@@ -24,4 +24,12 @@ public interface GiftService {
 	 */
 	public String get(String who);
 
+	/**
+	 * Returns a random gift idea for a person.
+	 * 
+	 * @param who
+	 * @return
+	 */
+	public String getRandom(String who);
+
 }

@@ -1,10 +1,13 @@
 package com.drive2code.gift_ideas;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -50,6 +53,45 @@ public class TextFileGiftServiceTest {
 		giftService.add("Nina", "chocolate");
 		
 		assertEquals("keychain, bike, chocolate", giftService.get("Nina"));
+		
+	}
+	
+	@Test
+	public void testGetRandom() {
+		
+		GiftService giftService = new TextFileGiftService(randomFile);
+		
+		giftService.add("Chase", "headphones");
+		giftService.add("Chase", "beer");
+		giftService.add("Chase", "laptop");
+		
+		String randomGift = giftService.getRandom("Chase");
+		
+		assertNotNull(randomGift);
+		assertTrue("random gift isn't contained in list of gifts", Arrays.asList("headphones", "beer", "laptop").contains(randomGift));
+		
+	}
+	
+	@Test
+	public void testGetRandomWithPersonNotAddedYet() {
+		
+		GiftService giftService = new TextFileGiftService(randomFile);
+		
+		String randomGift = giftService.getRandom("Peter");
+		
+		assertEquals("no gifts for Peter yet. Use add Peter to add gifts for them", randomGift);
+		
+	}
+	
+	@Test
+	public void testGetRandomForPersonWithOneGift() {
+		
+		GiftService giftService = new TextFileGiftService(randomFile);
+		giftService.add("Paul", "Spring in Action");
+		
+		String randomGift = giftService.getRandom("Paul");
+		
+		assertEquals("Spring in Action", randomGift);
 		
 	}
 	
