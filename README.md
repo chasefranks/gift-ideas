@@ -4,13 +4,9 @@ A simple command line application to save and retrieve gift ideas.
 
 ## To Use
 
-Build the project with Maven
+You will need at Maven and Java installed on your system to run this project. 
 
-```
-mvn clean package
-```
-
-Then run the start up script
+Run the start up script
 
 ```
 ./start.sh

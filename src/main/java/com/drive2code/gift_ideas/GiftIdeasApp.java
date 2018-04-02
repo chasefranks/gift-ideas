@@ -23,8 +23,8 @@ public class GiftIdeasApp {
 	}
 	
 	@Command(
-		description = "retrieve a random gift idea for someone",
-		header = "random gift idea: "
+		description = "retrieve the list of gifts for someone",
+		header = "gift ideas: "
 	)
 	public String get(String who) {		
 		return giftService.get(who);
