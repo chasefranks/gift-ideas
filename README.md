@@ -15,7 +15,7 @@ Run the start up script
 to launch the command line, or launch the runnable jar directly with
 
 ```
-java -jar target/gift-ideas-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/gift-ideas-1.0.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 Then you can save a gift idea for someone like this
@@ -35,5 +35,5 @@ gift-ideas> get Mom
 By default, gift ideas will be saved as json in a file called gift-ideas.json at the root of this project. You can use a different file by passing it on the command line like
 
 ```
-java -jar target/gift-ideas-0.0.1-SNAPSHOT-jar-with-dependencies.jar /Users/me/my-personal-gifts.json
+java -jar target/gift-ideas-1.0.0-SNAPSHOT-jar-with-dependencies.jar /Users/me/my-personal-gifts.json
 ```
