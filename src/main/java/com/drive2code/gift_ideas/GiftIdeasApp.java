@@ -2,45 +2,34 @@ package com.drive2code.gift_ideas;
 
 import java.io.IOException;
 
-import asg.cliche.Command;
+import com.drive2code.gift_ideas.cli.GiftIdeasCli;
+import com.drive2code.gift_ideas.service.GiftService;
+import com.drive2code.gift_ideas.service.TextFileGiftService;
+
 import asg.cliche.ShellFactory;
 
+/**
+ * Main launcher for this application.
+ * 
+ * @author chase
+ *
+ */
 public class GiftIdeasApp {
-	
-	// dependency is injected through constructor
-	private GiftService giftService;
-	
-	public GiftIdeasApp(GiftService giftService) {
-		this.giftService = giftService;
-	}
-	
-	@Command(
-		description = "add a gift idea for someone"
-	)
-	public void add(String who, String what) {		
-		System.out.println(String.format("adding gift idea %s for %s", what, who));
-		giftService.add(who, what);		
-	}
-	
-	@Command(
-		description = "retrieve the list of gifts for someone",
-		header = "gift ideas: "
-	)
-	public String get(String who) {		
-		return giftService.get(who);
-	}
-	
-	@Command(
-		description = "retrieve a random gift for someone",
-		header = "random gift idea: "
-	)
-	public String getRandom(String who) {
-		return giftService.getRandom(who);
-	}
 
 	public static void main(String[] args) throws IOException {
-		// TODO command line option to pass in a text file for saving gift ideas
-		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasApp(new InMemoryGiftService()))
+		
+		GiftService giftService;
+		
+		if (args.length > 0) {
+			String giftFilePath = args[0];
+			System.out.println("Gift ideas will be saved in file located at " + giftFilePath);
+			giftService = new TextFileGiftService(giftFilePath);
+		} else {
+			System.out.println("Gift ideas will be saved in file located at ./" + TextFileGiftService.DEFAULT_FILE);
+			giftService = new TextFileGiftService();
+		}
+		
+		ShellFactory.createConsoleShell("gift-ideas", "", new GiftIdeasCli(giftService))
 			.commandLoop();
 	}
 

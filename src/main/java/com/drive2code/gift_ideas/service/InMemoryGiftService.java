@@ -1,4 +1,4 @@
-package com.drive2code.gift_ideas;
+package com.drive2code.gift_ideas.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;

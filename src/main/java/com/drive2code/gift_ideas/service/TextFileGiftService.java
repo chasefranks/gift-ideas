@@ -1,4 +1,4 @@
-package com.drive2code.gift_ideas;
+package com.drive2code.gift_ideas.service;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TextFileGiftService implements GiftService {
 	
-	private static final String DEFAULT_FILE = "gift-ideas.json";
+	public static final String DEFAULT_FILE = "gift-ideas.json";
 	
 	private HashMap<String, List<String>> giftsMap; // Nina -> { keychain, chandelier }
 	private ObjectMapper mapper = new ObjectMapper();
@@ -99,6 +99,7 @@ public class TextFileGiftService implements GiftService {
 		} else {
 			return gifts.get(new Random().nextInt(numberOfGifts - 1));
 		}
+		
 	}
 
 	/**

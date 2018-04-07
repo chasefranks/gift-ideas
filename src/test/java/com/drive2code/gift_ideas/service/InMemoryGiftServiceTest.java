@@ -1,10 +1,13 @@
-package com.drive2code.gift_ideas;
+package com.drive2code.gift_ideas.service;
 
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
 import org.junit.Test;
+
+import com.drive2code.gift_ideas.service.GiftService;
+import com.drive2code.gift_ideas.service.InMemoryGiftService;
 
 public class InMemoryGiftServiceTest {
 	

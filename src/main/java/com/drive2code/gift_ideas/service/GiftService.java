@@ -1,4 +1,4 @@
-package com.drive2code.gift_ideas;
+package com.drive2code.gift_ideas.service;
 
 /**
  * Represents a service for saving and retrieving gift ideas.
