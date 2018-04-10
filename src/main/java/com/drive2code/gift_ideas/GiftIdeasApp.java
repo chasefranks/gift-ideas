@@ -3,8 +3,6 @@ package com.drive2code.gift_ideas;
 import java.io.IOException;
 
 import com.drive2code.gift_ideas.cli.GiftIdeasCli;
-import com.drive2code.gift_ideas.service.PersonService;
-import com.drive2code.gift_ideas.service.TextFileGiftService;
 import com.drive2code.gift_ideas.service.TextFilePersonService;
 
 import asg.cliche.ShellFactory;
@@ -26,7 +24,7 @@ public class GiftIdeasApp {
 			System.out.println("Gift ideas will be saved in file located at " + giftFilePath);
 			personService = new TextFilePersonService(giftFilePath);
 		} else {
-			System.out.println("Gift ideas will be saved in file located at ./" + TextFileGiftService.DEFAULT_FILE);
+			System.out.println("Gift ideas will be saved in file located at ./" + TextFilePersonService.DEFAULT_FILE);
 			personService = new TextFilePersonService();
 		}
 		

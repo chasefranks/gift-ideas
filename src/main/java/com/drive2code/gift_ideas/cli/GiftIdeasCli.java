@@ -5,11 +5,9 @@ import java.util.Random;
 
 import com.drive2code.gift_ideas.model.Gift;
 import com.drive2code.gift_ideas.model.Person;
-import com.drive2code.gift_ideas.service.GiftService;
 import com.drive2code.gift_ideas.service.PersonService;
 
 import asg.cliche.Command;
-import asg.cliche.Param;
 
 /**
  * This class contains the {@link Command} methods bound to
