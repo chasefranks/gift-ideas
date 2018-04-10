@@ -22,8 +22,17 @@ public class GiftIdeasCli {
 	@Command(
 		description = "add a gift idea for someone"
 	)
-	public void add(String who, String what) {		
+	public void add(String who, String what, String... tags) {		
 		System.out.println(String.format("adding gift idea %s for %s", what, who));
+		
+		if (tags.length > 0) {
+			System.out.print("with tags: ");
+			for(String tag : tags)
+				System.out.print(tag + " ");
+			
+			System.out.println();
+		}
+		
 		giftService.add(who, what);		
 	}
 	
