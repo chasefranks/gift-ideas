@@ -103,7 +103,7 @@ public class GiftIdeasCli {
 	
 	@Command(
 		description = "retrieve the list of gifts for someone",
-		header = "gift ideas: "
+		header = "------------------\ngift ideas:\n------------------"
 	)
 	public String get(String who) {
 		
@@ -115,7 +115,31 @@ public class GiftIdeasCli {
 		personService.get(who).getGifts()
 			.forEach(gift -> {
 				giftsAsString.append(gift);
+				giftsAsString.append("\n");
 			});
+		
+		return giftsAsString.toString();
+
+	}
+	
+	@Command(
+		description = "retrieve the list of gifts for someone by tag",
+		header = "------------------\ngift ideas:\n------------------"
+	)
+	public String get(String who, String tag) {
+		
+		StringBuilder giftsAsString = new StringBuilder();
+		
+		if (personService.exists(who)) {
+			personService.get(who)
+				.getGifts()
+				.stream()
+				.filter(gift -> gift.getTags().contains(tag))
+				.forEach(gift -> {
+					giftsAsString.append(gift.toString());
+					giftsAsString.append("\n");
+				});
+		}		
 		
 		return giftsAsString.toString();
 

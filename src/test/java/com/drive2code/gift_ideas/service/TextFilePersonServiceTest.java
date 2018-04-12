@@ -20,7 +20,7 @@ public class TextFilePersonServiceTest {
 	
 	private String randomFile;
 	
-	@Before // vs @BeforeClass
+	@Before
 	public void setUp() throws IOException {
 		randomFile = "testing-" + random.nextInt(10000) + ".json";
 		System.out.println("using random file at " + randomFile);
