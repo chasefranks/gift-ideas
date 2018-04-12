@@ -33,5 +33,17 @@ public class Person {
 	public void gift(Gift gift) {
 		this.gifts.add(gift);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (!(obj instanceof Person)) {
+			return false;
+		}
+		
+		Person that = (Person) obj;
+		return this.name.equals(that.getName());		
+		
+	}
 
 }
