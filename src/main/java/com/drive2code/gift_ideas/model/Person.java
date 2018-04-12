@@ -8,9 +8,7 @@ public class Person {
 	private String name;
 	private List<Gift> gifts = new ArrayList<>();
 	
-	public Person() {
-		// TODO Auto-generated constructor stub
-	}
+	public Person() {}
 
 	public Person(String name) {
 		this.name = name;

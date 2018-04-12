@@ -32,7 +32,10 @@ public class GiftIdeasApp {
 			.commandLoop();
 		
 		// flush to text file
+		System.out.println("saving gift ideas...");
 		personService.flush();
+		
+		System.out.println("exiting...");
 		
 	}
 

@@ -59,7 +59,6 @@ public class GiftIdeasCli {
 		}
 		
 		/*****************
-		 * TODO 
 		 * person service
 		 * lookup if who exists
 		 *  if not

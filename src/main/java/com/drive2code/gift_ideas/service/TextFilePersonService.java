@@ -42,7 +42,6 @@ public class TextFilePersonService implements PersonService {
 	@Override
 	public void add(Person person) {
 		personsMap.put(person.getName(), person);
-		flush();
 	}
 
 	@Override
@@ -59,8 +58,6 @@ public class TextFilePersonService implements PersonService {
 	 * Writes contents of {@link HashMap} gift ideas to disk.
 	 */
 	public void flush() {
-		
-		// TODO how do we flush when the application shuts down?
 		
 		File file = new File(this.path);	
 		
