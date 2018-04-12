@@ -26,7 +26,7 @@ public class GiftIdeasCli {
 	@Command(
 		description = "add a gift idea for someone"
 	)
-	public void add(String who, String what) {		
+	public void add(String who, String what) {	
 		
 		System.out.println(String.format("adding gift idea %s for %s", what, who));
 		
@@ -102,6 +102,19 @@ public class GiftIdeasCli {
 	}
 	
 	@Command(
+		description = "link a website to a gift idea"
+	)	
+	public void link(String who, String what, String link) {
+		if (personService.exists(who)) {
+			personService.get(who)
+				.getGifts()
+				.stream()
+				.filter(gift -> gift.getName().equals(what))
+				.forEach(gift -> gift.setLink(link));
+		}
+	}
+	
+	@Command(
 		description = "retrieve the list of gifts for someone",
 		header = "------------------\ngift ideas:\n------------------"
 	)
@@ -112,11 +125,12 @@ public class GiftIdeasCli {
 		if (!personService.exists(who))
 			return "";
 		
-		personService.get(who).getGifts()
-			.forEach(gift -> {
-				giftsAsString.append(gift);
-				giftsAsString.append("\n");
-			});
+		int idx = 1;
+		for(Gift gift : personService.get(who).getGifts()) {
+			giftsAsString.append(Integer.toString(idx++) + ".) ");
+			giftsAsString.append(gift);
+			giftsAsString.append("\n\n");
+		}
 		
 		return giftsAsString.toString();
 
@@ -137,7 +151,7 @@ public class GiftIdeasCli {
 				.filter(gift -> gift.getTags().contains(tag))
 				.forEach(gift -> {
 					giftsAsString.append(gift.toString());
-					giftsAsString.append("\n");
+					giftsAsString.append("\n\n");
 				});
 		}		
 		
