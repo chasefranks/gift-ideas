@@ -7,6 +7,7 @@ public class Gift {
 	
 	private String name;
 	private List<String> tags = new ArrayList<>();
+	private String link;
 	
 	public Gift() {	}
 	
@@ -34,6 +35,14 @@ public class Gift {
 		this.tags.add(tag);
 	}
 	
+	public String getLink() {
+		return link;
+	}
+	
+	public void setLink(String link) {
+		this.link = link;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder giftAsString = new StringBuilder(name);
@@ -44,6 +53,10 @@ public class Gift {
 			giftAsString.append(" " + tag);
 		});
 		giftAsString.append("\n");
+		
+		if (link != null) {
+			giftAsString.append("link: " + link);
+		}
 		
 		return giftAsString.toString();
 	}
