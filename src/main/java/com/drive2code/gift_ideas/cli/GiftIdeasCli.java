@@ -85,6 +85,21 @@ public class GiftIdeasCli {
 		}		
 		
 	}
+
+	@Command(
+		description = "add a tag to a gift idea"
+	)
+	public void tag(String who, String what, String tag) {
+		if (personService.exists(who)) {
+			personService.get(who)
+				.getGifts()
+				.stream()
+				.filter(gift -> 	gift.getName().equals(what))
+				.forEach(gift -> gift.tag(tag));
+		} else {
+			System.out.println("person " + who + " doesn't exist");
+		}
+	}
 	
 	@Command(
 		description = "retrieve the list of gifts for someone",
