@@ -17,6 +17,8 @@ public class GiftIdeasApp {
 
 	public static void main(String[] args) throws IOException {
 		
+		displayBanner();
+		
 		TextFilePersonService personService;
 		
 		if (args.length > 0) {
@@ -36,6 +38,24 @@ public class GiftIdeasApp {
 		personService.flush();
 		
 		System.out.println("exiting...");
+		
+	}
+
+	/**
+	 * Displays a start up banner. Thanks to 
+	 * <a href="http://www.bagill.com/ascii-sig.php">www.bagill.com/ascii-sig.php</a> for providing
+	 * the tool used to generate this banner.
+	 */
+	private static void displayBanner() {
+		
+		StringBuilder banner = new StringBuilder();
+		banner.append("  ____ _  __ _     ___    _                " + "\n");
+		banner.append(" / ___(_)/ _| |_  |_ _|__| | ___  __ _ ___ " + "\n");
+		banner.append("| |  _| | |_| __|  | |/ _` |/ _ \\/ _` / __|" + "\n");
+		banner.append("| |_| | |  _| |_   | | (_| |  __/ (_| \\__ \\" + "\n");
+		banner.append(" \\____|_|_|  \\__| |___\\__,_|\\___|\\__,_|___/" + "\n");
+		
+		System.out.println(banner);
 		
 	}
 
