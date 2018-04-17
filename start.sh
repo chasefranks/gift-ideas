@@ -7,4 +7,4 @@ then
 fi
 
 # launch the runnable jar
-java -jar target/gift-ideas-1.0.0-jar-with-dependencies.jar
+java -jar target/gift-ideas-1.1.0-jar-with-dependencies.jar

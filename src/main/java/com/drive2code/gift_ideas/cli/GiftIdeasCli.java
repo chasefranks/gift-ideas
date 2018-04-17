@@ -8,6 +8,7 @@ import com.drive2code.gift_ideas.model.Person;
 import com.drive2code.gift_ideas.service.PersonService;
 
 import asg.cliche.Command;
+import asg.cliche.Param;
 
 /**
  * This class contains the {@link Command} methods bound to
@@ -26,7 +27,7 @@ public class GiftIdeasCli {
 	@Command(
 		description = "add a gift idea for someone"
 	)
-	public void add(String who, String what) {	
+	public void add(@Param(name = "who") String who, @Param(name = "gift") String what) {	
 		
 		System.out.println(String.format("adding gift idea %s for %s", what, who));
 		
@@ -46,7 +47,7 @@ public class GiftIdeasCli {
 	@Command(
 		description = "add a gift idea for someone"
 	)
-	public void add(String who, String what, String... tags) {		
+	public void add(@Param(name = "who") String who, @Param(name = "gift") String what, @Param(name = "tags") String... tags) {		
 		
 		System.out.println(String.format("adding gift idea %s for %s", what, who));
 		
@@ -89,7 +90,7 @@ public class GiftIdeasCli {
 	@Command(
 		description = "add a tag to a gift idea"
 	)
-	public void tag(String who, String what, String tag) {
+	public void tag(@Param(name = "who") String who, @Param(name = "gift") String what, @Param(name = "tag") String tag) {
 		if (personService.exists(who)) {
 			personService.get(who)
 				.getGifts()
@@ -104,7 +105,7 @@ public class GiftIdeasCli {
 	@Command(
 		description = "link a website to a gift idea"
 	)	
-	public void link(String who, String what, String link) {
+	public void link(@Param(name = "who") String who, @Param(name = "gift") String what, @Param(name = "website") String link) {
 		if (personService.exists(who)) {
 			personService.get(who)
 				.getGifts()
@@ -118,7 +119,7 @@ public class GiftIdeasCli {
 		description = "retrieve the list of gifts for someone",
 		header = "------------------\ngift ideas:\n------------------"
 	)
-	public String get(String who) {
+	public String get(@Param( name = "who") String who) {
 		
 		StringBuilder giftsAsString = new StringBuilder();
 		
@@ -140,7 +141,7 @@ public class GiftIdeasCli {
 		description = "retrieve the list of gifts for someone by tag",
 		header = "------------------\ngift ideas:\n------------------"
 	)
-	public String get(String who, String tag) {
+	public String get(@Param( name = "who") String who, @Param(name = "tag") String tag) {
 		
 		StringBuilder giftsAsString = new StringBuilder();
 		
@@ -163,7 +164,7 @@ public class GiftIdeasCli {
 		description = "retrieve a random gift for someone",
 		header = "random gift idea: "
 	)
-	public String getRandom(String who) {
+	public String getRandom(@Param( name = "who") String who) {
 		
 		Random random = new Random();
 		
